@@ -61,6 +61,25 @@ enum ConfigError {
     Io(#[from] std::io::Error),
 }
 
+#[derive(Debug, Clone, PartialEq)]
+enum TokenKind {
+    Equal,
+    StringLit(String),
+    Integer(i64),
+    Float(f64),
+    Boolean(bool),
+    Comment(String),
+    Identifier(String),
+    TableHeader(String),
+    Newline,
+}
+
+#[derive(Debug, Clone)]
+struct SpannedToken {
+    kind: TokenKind,
+    line: usize,
+    col: usize,
+}
 fn main() {
     println!("Hello, world!");
 }
